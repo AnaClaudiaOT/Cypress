@@ -26,28 +26,28 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out do codigo do projeto
-      - uses: actions/checkout@v2
+    # Checks-out do codigo do projeto
+    - uses: actions/checkout@v2
       
-      # Setup do Node.JS
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v2.1.2
-        with: 
-          node-version: ${{matrix.node-version}}
+    # Setup do Node.JS
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v2.1.2
+      with: 
+        node-version: ${{ matrix.node-version }}
        
-       # Instalando as dependências
-      - run: npm install    
+    # Instalando as dependências
+    - run: npm install    
 
-       # Executar os testes usando o Cucumber
-      - run: npm run cy:run:cucumber
+    # Executar os testes usando o Cucumber
+    - run: npm run cy:run:cucumber
         
-        # Gerar o relatório em html
-      - run: npm run report:cucumber
+    # Gerar o relatório em html
+    - run: npm run report:cucumber
       
-        # Publicar relatorio em html
-      - name: Deploy to GithubPages
-        uses: JamesIves/github-pages-deploy-action@3.5.9
-        with:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          BRANCH: gh-pages
-          FOLDER: cypress/reports
+    # Publicar relatorio em html
+    - name: Deploy to GitHubPages
+      uses: JamesIves/github-pages-deploy-action@3.7.1
+      with:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         BRANCH: gh-pages
+         FOLDER: cypress/reports
